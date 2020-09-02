@@ -7,10 +7,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,8 +32,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApodDisplay extends AppCompatActivity {
 
-    private VideoView videoView;
-    private TextView textView;
+    private TextView textTitle,textExplanation;
+    private WebView mWebView;
     private ImageView imageView;
     private int year,month,day;
     private  String date;
@@ -35,7 +42,9 @@ public class ApodDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apod_display);
         imageView=(ImageView) findViewById(R.id.imageView);
-        textView=(TextView) findViewById(R.id.textView2);
+        mWebView=(WebView) findViewById(R.id.webView);
+        textTitle=(TextView) findViewById(R.id.textTitle);
+        textExplanation=(TextView)findViewById(R.id.textExplanation);
         Retrieve();
 
         Retrofit retrofit=new Retrofit.Builder()
@@ -52,7 +61,8 @@ public class ApodDisplay extends AppCompatActivity {
             public void onResponse(Call<Apod> call, Response<Apod> response) {
                 if(!response.isSuccessful())
                 {
-                    textView.setText("Code:"+response.code());
+                    textTitle.setText("Code:"+response.code());
+                    textExplanation.setText("");
                     return;
                 }
 
@@ -63,13 +73,38 @@ public class ApodDisplay extends AppCompatActivity {
                 String media_type=apod.getMedia_type();
                 String service_version=apod.getService_version();
                 String url=apod.getUrl();
-                textView.setText(title+" "+date1);
+                textTitle.setText("Title:"+title+"\nDate:"+date1);
+                textExplanation.setText(explanation);
+
+                if(media_type.equalsIgnoreCase("image"))
+                {
+                    mWebView.setVisibility(View.INVISIBLE);
+                    imageView.setVisibility(View.VISIBLE);
+                    Glide.with(ApodDisplay.this)
+                            .load(url)
+                            .into(imageView);
+                }
+                else
+                {
+                    imageView.setVisibility(View.INVISIBLE);
+                    mWebView.setVisibility(View.VISIBLE);
+                    mWebView.getSettings().setJavaScriptEnabled(true);
+                    mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
+                    mWebView.loadUrl(url);
+                    mWebView.setWebChromeClient(new WebChromeClient());
+
+                }
+
+
+
 
             }
 
             @Override
             public void onFailure(Call<Apod> call, Throwable t) {
-                 textView.setText(t.getMessage());
+                 textTitle.setText(t.getMessage());
+                textExplanation.setText("");
+
             }
         });
 

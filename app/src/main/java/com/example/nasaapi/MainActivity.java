@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         intent.putExtra("date",datLeftFormatted);
 
        //finish();
-        startActivity(intent);
+       startActivity(intent);
 
 
     }
