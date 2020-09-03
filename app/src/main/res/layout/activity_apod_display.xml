@@ -6,72 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ApodDisplay">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        >
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="325dp"
+            android:visibility="invisible"
+            tools:visibility="visible">
+        </WebView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="325dp"
+            android:layout_marginTop="15dp"
+            tools:visibility="visible"
+            android:visibility="invisible">
+
+         </ImageView>
 
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="185dp"
-            android:layout_marginLeft="185dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="186dp"
-            android:layout_marginRight="186dp"
-            android:text="Title"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="335dp"
-            android:layout_height="327dp"
-            android:visibility="invisible"
-            tools:visibility="visible"
-            android:layout_marginStart="38dp"
-            android:layout_marginLeft="38dp"
+            android:layout_below="@+id/imageView"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginRight="38dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:text="title"
+            android:textColor="#31D338"
+            android:textSize="20sp"></TextView>
 
         <TextView
             android:id="@+id/textExplanation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="169dp"
-            android:layout_marginLeft="169dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="169dp"
-            android:layout_marginRight="169dp"
-            android:text="Explanation"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitle">
-
-        </TextView>
-
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="325dp"
-            android:layout_height="327dp"
-            android:layout_marginTop="12dp"
-            android:visibility="invisible"
-            tools:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_below="@+id/textTitle"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="2dp"
+            android:text="explanation"
+            android:textColor="#03A9F4"
+            android:textSize="18sp"></TextView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </ScrollView>
 
 

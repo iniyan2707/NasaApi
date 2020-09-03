@@ -44,7 +44,10 @@ public class ApodDisplay extends AppCompatActivity {
         imageView=(ImageView) findViewById(R.id.imageView);
         mWebView=(WebView) findViewById(R.id.webView);
         textTitle=(TextView) findViewById(R.id.textTitle);
+        textTitle.setText("");
         textExplanation=(TextView)findViewById(R.id.textExplanation);
+        textExplanation.setText("");
+
         Retrieve();
 
         Retrofit retrofit=new Retrofit.Builder()

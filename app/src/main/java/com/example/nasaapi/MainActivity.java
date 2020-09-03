@@ -40,17 +40,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        Calendar c=Calendar.getInstance();
-        c.set(Calendar.YEAR,year);
-        c.set(Calendar.MONTH,month);
-        c.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-       // String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-        String datLeftFormatted=String.format(Locale.getDefault(),
+              String datLeftFormatted=String.format(Locale.getDefault(),
               "%d-%02d-%02d",year,month+1,dayOfMonth);
         textView.setText(datLeftFormatted);
        Intent intent=new Intent(MainActivity.this,ApodDisplay.class);
         intent.putExtra("date",datLeftFormatted);
-
        //finish();
        startActivity(intent);
 
